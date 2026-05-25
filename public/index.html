@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Bar Simplex</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ESQUERDA -->
+
+    <div class="container">
+
+        <h1>🍻 Sistema Bar Simplex</h1>
+
+        <button onclick="calcular()">
+            Executar Simplex
+        </button>
+
+        <hr>
+
+        <h2>Cadastrar Produto</h2>
+
+        <form id="formProduto">
+
+            <input
+                type="text"
+                id="nome"
+                placeholder="Nome"
+                required
+            >
+
+            <input
+                type="number"
+                id="custo"
+                step="0.01"
+                placeholder="Custo"
+            >
+
+            <input
+                type="number"
+                id="venda"
+                step="0.01"
+                placeholder="Preço de venda"
+            >
+
+            <input
+                type="number"
+                id="tempo"
+                placeholder="Tempo"
+            >
+
+            <input
+                type="number"
+                id="demanda"
+                placeholder="Demanda semanal"
+            >
+
+            <button type="submit">
+                Salvar Produto
+            </button>
+
+        </form>
+
+        <hr>
+
+        <div class="acoes">
+
+            <button onclick="selecionarTodos()">
+                Selecionar Todos
+            </button>
+
+            <button onclick="desmarcarTodos()">
+                Desmarcar Todos
+            </button>
+
+        </div>
+
+        <h2>Produtos cadastrados</h2>
+
+        <div id="listaProdutos"></div>
+
+    </div>
+
+    <!-- DIREITA -->
+
+    <div class="painel">
+
+        <h2>📊 Resultado</h2>
+
+        <div id="resultado"></div>
+
+        <div id="tabelaSimplex"></div>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "custosFixos": {
+    "aluguel": 2500,
+    "energia": 600,
+    "funcionario": 3000
+  },
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Coca Lata",
+      "custo": 3.5,
+      "venda": 6,
+      "lucro": 2.5,
+      "tempo": 1,
+      "demanda": 11,
+      "selecionado": true
+    },
+    {
+      "id": 2,
+      "nome": "Skol Lata",
+      "custo": 3,
+      "venda": 5.5,
+      "lucro": 2.5,
+      "tempo": 1,
+      "demanda": 120,
+      "selecionado": true
+    },
+    {
+      "id": 3,
+      "nome": "Água",
+      "custo": 1,
+      "venda": 3,
+      "lucro": 2,
+      "tempo": 1,
+      "demanda": 80,
+      "selecionado": true
+    },
+    {
+      "id": 4,
+      "nome": "Eight",
+      "custo": 6,
+      "venda": 10,
+      "lucro": 4,
+      "tempo": 1,
+      "demanda": 77,
+      "selecionado": true
+    },
+    {
+      "id": 5,
+      "nome": "Salgado Frito",
+      "custo": 5,
+      "venda": 9,
+      "lucro": 4,
+      "tempo": 3,
+      "demanda": 40,
+      "selecionado": true
+    },
+    {
+      "id": 6,
+      "nome": "Salgado Assado",
+      "custo": 5,
+      "venda": 10,
+      "lucro": 5,
+      "tempo": 3,
+      "demanda": 60,
+      "selecionado": true
+    },
+    {
+      "id": 1779720304268,
+      "nome": "antartica lata",
+      "custo": 2.01,
+      "venda": 4.5,
+      "lucro": 2.49,
+      "tempo": 1,
+      "demanda": 130,
+      "selecionado": true
+    }
+  ]
+}
