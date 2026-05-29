@@ -1,127 +1,18 @@
 const API = "/dados";
 
 // =========================
-// CARREGAR PRODUTOS
+// UTIL
 // =========================
 
-async function carregarProdutos() {
+async function buscarDados() {
 
-    const resposta = await fetch(API);
+    const resposta =
+        await fetch(API);
 
-    const dados = await resposta.json();
-
-    const lista =
-        document.getElementById(
-            "listaProdutos"
-        );
-
-    lista.innerHTML = "";
-
-    dados.produtos.forEach(produto => {
-
-        lista.innerHTML += `
-
-            <div class="produto">
-
-                <div class="produto-info">
-
-                    <strong>
-                        ${produto.nome}
-                    </strong>
-
-                    <span>
-                        Lucro:
-                        R$ ${produto.lucro}
-                    </span>
-
-                    <span>
-                        Demanda semanal:
-                        ${produto.demanda}
-                    </span>
-
-                </div>
-
-                <div
-                    class="check
-                    ${produto.selecionado
-                        ? "ativo"
-                        : ""
-                    }"
-
-                    onclick="
-                        alterarSelecao(
-                            ${produto.id}
-                        )
-                    "
-                >
-
-                    ✓
-
-                </div>
-
-            </div>
-        `;
-    });
+    return await resposta.json();
 }
 
-// =========================
-// CADASTRAR PRODUTO
-// =========================
-
-document
-.getElementById("formProduto")
-.addEventListener("submit", async e => {
-
-    e.preventDefault();
-
-    const resposta = await fetch(API);
-
-    const dados = await resposta.json();
-
-    const nome =
-        document.getElementById(
-            "nome"
-        ).value;
-
-    const custo = Number(
-        document.getElementById(
-            "custo"
-        ).value
-    );
-
-    const venda = Number(
-        document.getElementById(
-            "venda"
-        ).value
-    );
-
-    const tempo = Number(
-        document.getElementById(
-            "tempo"
-        ).value
-    );
-
-    const demanda = Number(
-        document.getElementById(
-            "demanda"
-        ).value
-    );
-
-    const lucro = venda - custo;
-
-    dados.produtos.push({
-
-        id: Date.now(),
-
-        nome,
-        custo,
-        venda,
-        lucro,
-        tempo,
-        demanda,
-
-        selecionado: true
-    });
+async function salvarDados(dados) {
 
     await fetch(API, {
 
@@ -135,25 +26,90 @@ document
 
         body: JSON.stringify(dados)
     });
-
-    carregarProdutos();
-
-    document
-        .getElementById(
-            "formProduto"
-        )
-        .reset();
-});
+}
 
 // =========================
-// ALTERAR SELEÇÃO
+// PRODUTOS
+// =========================
+
+async function carregarProdutos() {
+
+    const dados =
+        await buscarDados();
+
+    renderizarProdutos(
+        dados.produtos
+    );
+}
+
+function renderizarProdutos(produtos) {
+
+    const lista =
+        document.getElementById(
+            "listaProdutos"
+        );
+
+    lista.innerHTML = produtos.map(produto => `
+
+        <div class="
+            produto
+            ${produto.selecionado
+                ? "selecionado"
+                : ""
+            }
+        ">
+
+            <div class="produto-info">
+
+                <strong>
+                    ${produto.nome}
+                </strong>
+
+                <span>
+                    Lucro:
+                    R$ ${produto.lucro.toFixed(2)}
+                </span>
+
+                <span>
+                    Demanda semanal:
+                    ${produto.demanda}
+                </span>
+
+            </div>
+
+            <div
+                class="
+                    check
+                    ${produto.selecionado
+                        ? "ativo"
+                        : ""
+                    }
+                "
+
+                onclick="
+                    alterarSelecao(
+                        ${produto.id}
+                    )
+                "
+            >
+
+                ✓
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+// =========================
+// SELEÇÃO
 // =========================
 
 async function alterarSelecao(id) {
 
-    const resposta = await fetch(API);
-
-    const dados = await resposta.json();
+    const dados =
+        await buscarDados();
 
     const produto =
         dados.produtos.find(
@@ -163,80 +119,32 @@ async function alterarSelecao(id) {
     produto.selecionado =
         !produto.selecionado;
 
-    await fetch(API, {
-
-        method: "POST",
-
-        headers: {
-
-            "Content-Type":
-                "application/json"
-        },
-
-        body: JSON.stringify(dados)
-    });
+    await salvarDados(dados);
 
     carregarProdutos();
 }
-
-// =========================
-// SELECIONAR TODOS
-// =========================
 
 async function selecionarTodos() {
 
-    const resposta = await fetch(API);
-
-    const dados = await resposta.json();
-
-    dados.produtos.forEach(p => {
-
-        p.selecionado = true;
-    });
-
-    await fetch(API, {
-
-        method: "POST",
-
-        headers: {
-
-            "Content-Type":
-                "application/json"
-        },
-
-        body: JSON.stringify(dados)
-    });
-
-    carregarProdutos();
+    alterarTodos(true);
 }
-
-// =========================
-// DESMARCAR TODOS
-// =========================
 
 async function desmarcarTodos() {
 
-    const resposta = await fetch(API);
+    alterarTodos(false);
+}
 
-    const dados = await resposta.json();
+async function alterarTodos(valor) {
+
+    const dados =
+        await buscarDados();
 
     dados.produtos.forEach(p => {
 
-        p.selecionado = false;
+        p.selecionado = valor;
     });
 
-    await fetch(API, {
-
-        method: "POST",
-
-        headers: {
-
-            "Content-Type":
-                "application/json"
-        },
-
-        body: JSON.stringify(dados)
-    });
+    await salvarDados(dados);
 
     carregarProdutos();
 }
@@ -252,6 +160,11 @@ async function calcular() {
 
     const dados =
         await resposta.json();
+
+    renderizarResultado(dados);
+}
+
+function renderizarResultado(dados) {
 
     document.getElementById(
         "resultado"
@@ -282,7 +195,9 @@ async function calcular() {
         </p>
     `;
 
-    let html = `
+    document.getElementById(
+        "tabelaSimplex"
+    ).innerHTML = `
 
         <h3>
             Produtos Selecionados
@@ -294,36 +209,44 @@ async function calcular() {
 
                 <th>Produto</th>
                 <th>Demanda Mensal</th>
-                <th>Lucro</th>
+                <th>Lucro Unitário</th>
+                <th>Lucro Mensal</th>
 
             </tr>
+
+            ${dados.produtos.map(p => `
+
+                <tr>
+
+                    <td>${p.nome}</td>
+
+                    <td>
+                        ${p.demanda * 4}
+                    </td>
+
+                    <td>
+                        R$ ${p.lucro.toFixed(2)}
+                    </td>
+
+                    <td>
+
+                        R$ ${(
+                            p.lucro *
+                            (p.demanda * 4)
+                        ).toFixed(2)}
+
+                    </td>
+
+                </tr>
+
+            `).join("")}
+
+        </table>
     `;
-
-    dados.produtos.forEach(p => {
-
-        html += `
-
-            <tr>
-
-                <td>${p.nome}</td>
-
-                <td>
-                    ${p.demanda * 4}
-                </td>
-
-                <td>
-                    R$ ${p.lucro}
-                </td>
-
-            </tr>
-        `;
-    });
-
-    html += `</table>`;
-
-    document.getElementById(
-        "tabelaSimplex"
-    ).innerHTML = html;
 }
+
+// =========================
+// INICIAR
+// =========================
 
 carregarProdutos();

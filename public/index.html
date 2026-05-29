@@ -19,70 +19,37 @@
 
     <div class="container">
 
+        
         <h1>🍻 Sistema Bar Simplex</h1>
 
-        <button onclick="calcular()">
-            Executar Simplex
-        </button>
+        <div class="acoes-topo">
 
-        <hr>
+    <button onclick="calcular()">
+        Executar Simplex
+    </button>
 
-        <h2>Cadastrar Produto</h2>
+    <button onclick="
+        window.location.href='produtos.html'
+    ">
+        Cadastrar Produto
+    </button>
 
-        <form id="formProduto">
+</div>
 
-            <input
-                type="text"
-                id="nome"
-                placeholder="Nome"
-                required
-            >
+<hr>
 
-            <input
-                type="number"
-                id="custo"
-                step="0.01"
-                placeholder="Custo"
-            >
+<div class="acoes-selecao">
 
-            <input
-                type="number"
-                id="venda"
-                step="0.01"
-                placeholder="Preço de venda"
-            >
+    <button onclick="selecionarTodos()">
+        Selecionar Todos
+    </button>
 
-            <input
-                type="number"
-                id="tempo"
-                placeholder="Tempo"
-            >
+    <button onclick="desmarcarTodos()">
+        Desmarcar Todos
+    </button>
 
-            <input
-                type="number"
-                id="demanda"
-                placeholder="Demanda semanal"
-            >
-
-            <button type="submit">
-                Salvar Produto
-            </button>
-
-        </form>
-
-        <hr>
-
-        <div class="acoes">
-
-            <button onclick="selecionarTodos()">
-                Selecionar Todos
-            </button>
-
-            <button onclick="desmarcarTodos()">
-                Desmarcar Todos
-            </button>
-
-        </div>
+</div>
+    <hr>
 
         <h2>Produtos cadastrados</h2>
 

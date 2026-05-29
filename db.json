@@ -74,6 +74,26 @@
       "tempo": 1,
       "demanda": 130,
       "selecionado": true
+    },
+    {
+      "id": 1779974874334,
+      "nome": "corsa",
+      "custo": 10,
+      "venda": 15,
+      "lucro": 5,
+      "tempo": 1,
+      "demanda": 1,
+      "selecionado": true
+    },
+    {
+      "id": 1780064318542,
+      "nome": "paçoca",
+      "custo": 2,
+      "venda": 3,
+      "lucro": 1,
+      "tempo": 1,
+      "demanda": 50,
+      "selecionado": true
     }
   ]
 }

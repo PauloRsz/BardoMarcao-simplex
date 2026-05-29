@@ -46,7 +46,34 @@ button {
     padding: 12px;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 5px;
+    flex: 1;
+    display: inline-block;
+    width: 100%;
+    
+}
+
+
+.acoes-topo,
+.acoes-selecao {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.acoes-topo button,
+.acoes-selecao button {
+
+    flex: 1;
+
+    height: 50px;
+
+    font-size: 16px;
+
+    font-weight: bold;
 }
 
 button:hover {
@@ -114,4 +141,16 @@ th, td {
 th {
 
     background: #00aa44;
+}
+
+.cadastro {
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    
 }
