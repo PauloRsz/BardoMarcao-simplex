@@ -1,58 +1,52 @@
 body {
 
-    background: #181818;
-    color: white;
-    font-family: Arial;
     margin: 0;
+
+    background: #181818;
+
+    color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ========================= */
+/* HOME */
+/* ========================= */
 
 .layout {
 
     display: flex;
+
     gap: 20px;
+
     padding: 20px;
 }
 
 .container {
 
     width: 40%;
+
     background: #242424;
+
     padding: 20px;
+
     border-radius: 10px;
 }
 
 .painel {
 
     width: 60%;
+
     background: #242424;
+
     padding: 20px;
+
     border-radius: 10px;
 }
 
-input {
-
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
-}
-
-button {
-
-    background: #00aa44;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-    flex: 1;
-    display: inline-block;
-    width: 100%;
-    
-}
-
+/* ========================= */
+/* BOTÕES */
+/* ========================= */
 
 .acoes-topo,
 .acoes-selecao {
@@ -64,54 +58,118 @@ button {
     margin-bottom: 20px;
 }
 
-.acoes-topo button,
-.acoes-selecao button {
+button {
 
-    flex: 1;
+    width: 100%;
 
     height: 50px;
+
+    background: #00aa44;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
 
     font-size: 16px;
 
     font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
 button:hover {
 
-    opacity: 0.9;
+    background: #00cc55;
 }
+
+/* ========================= */
+/* PRODUTOS */
+/* ========================= */
 
 .produto {
 
     background: #333;
+
     padding: 15px;
+
     border-radius: 10px;
+
     margin-top: 10px;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 }
 
 .produto-info {
 
     display: flex;
+
     flex-direction: column;
 }
 
 .check {
 
-    width: 25px;
-    height: 25px;
+    width: 28px;
+
+    height: 28px;
+
     border-radius: 50%;
+
     background: #555;
-    cursor: pointer;
 
     display: flex;
-    align-items: center;
+
     justify-content: center;
 
+    align-items: center;
+
+    cursor: pointer;
+
     font-weight: bold;
+}
+
+.delete {
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #c0392b;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.delete:hover {
+
+    background: #e74c3c;
+}
+
+.produto-acoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
 }
 
 .check.ativo {
@@ -119,22 +177,26 @@ button:hover {
     background: #00cc55;
 }
 
-.acoes {
-
-    margin-bottom: 20px;
-}
+/* ========================= */
+/* TABELA */
+/* ========================= */
 
 table {
 
     width: 100%;
-    border-collapse: collapse;
+
     margin-top: 20px;
+
+    border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
 
     border: 1px solid #555;
-    padding: 10px;
+
+    padding: 12px;
+
     text-align: center;
 }
 
@@ -143,14 +205,71 @@ th {
     background: #00aa44;
 }
 
+/* ========================= */
+/* CADASTRO */
+/* ========================= */
+
 .cadastro {
 
     width: 100%;
+
     min-height: 100vh;
 
     display: flex;
 
+    flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
-    
+
+    gap: 30px;
+}
+
+.cadastro h1 {
+
+    margin: 0;
+
+    font-size: 48px;
+
+    text-align: center;
+}
+
+#formProduto {
+
+    width: 400px;
+
+    background: #242424;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+input {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    box-sizing: border-box;
+}
+
+input:focus {
+
+    outline: 2px solid #00aa44;
 }

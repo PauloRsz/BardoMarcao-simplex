@@ -1,252 +1,113 @@
 const API = "/dados";
+const SIMPLEX = "/simplex";
+
+// DOM elements
+const listaProdutos = document.getElementById("listaProdutos");
+const resultadoDiv = document.getElementById("resultado");
+const tabelaSimplexDiv = document.getElementById("tabelaSimplex");
 
 // =========================
-// UTIL
+// API helpers
 // =========================
-
-async function buscarDados() {
-
-    const resposta =
-        await fetch(API);
-
-    return await resposta.json();
-}
-
-async function salvarDados(dados) {
-
+const buscarDados = async () => await (await fetch(API)).json();
+const salvarDados = async (dados) => {
     await fetch(API, {
-
         method: "POST",
-
-        headers: {
-
-            "Content-Type":
-                "application/json"
-        },
-
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
     });
-}
+};
 
 // =========================
-// PRODUTOS
+// Produtos
 // =========================
-
 async function carregarProdutos() {
-
-    const dados =
-        await buscarDados();
-
-    renderizarProdutos(
-        dados.produtos
-    );
+    const { produtos } = await buscarDados();
+    renderizarProdutos(produtos);
 }
 
 function renderizarProdutos(produtos) {
-
-    const lista =
-        document.getElementById(
-            "listaProdutos"
-        );
-
-    lista.innerHTML = produtos.map(produto => `
-
-        <div class="
-            produto
-            ${produto.selecionado
-                ? "selecionado"
-                : ""
-            }
-        ">
-
+    listaProdutos.innerHTML = produtos.map(produto => `
+        <div class="produto ${produto.selecionado ? "selecionado" : ""}">
             <div class="produto-info">
-
-                <strong>
-                    ${produto.nome}
-                </strong>
-
-                <span>
-                    Lucro:
-                    R$ ${produto.lucro.toFixed(2)}
-                </span>
-
-                <span>
-                    Demanda semanal:
-                    ${produto.demanda}
-                </span>
-
+                <strong>${produto.nome}</strong>
+                <span>Lucro: R$ ${produto.lucro.toFixed(2)}</span>
+                <span>Demanda semanal: ${produto.demanda}</span>
             </div>
-
-            <div
-                class="
-                    check
-                    ${produto.selecionado
-                        ? "ativo"
-                        : ""
-                    }
-                "
-
-                onclick="
-                    alterarSelecao(
-                        ${produto.id}
-                    )
-                "
-            >
-
-                ✓
-
+            
+            <div class="produto-acoes">
+                <div class="delete" onclick="excluirProduto(${produto.id})">🗑️</div>
+                <div class="check ${produto.selecionado ? "ativo" : ""}"
+                     onclick="alterarSelecao(${produto.id})">✓</div>
             </div>
-
         </div>
-
     `).join("");
 }
 
 // =========================
-// SELEÇÃO
+// Seleção
 // =========================
-
 async function alterarSelecao(id) {
-
-    const dados =
-        await buscarDados();
-
-    const produto =
-        dados.produtos.find(
-            p => p.id === id
-        );
-
-    produto.selecionado =
-        !produto.selecionado;
-
+    const dados = await buscarDados();
+    dados.produtos.find(p => p.id === id).selecionado ^= true; // toggle
     await salvarDados(dados);
-
     carregarProdutos();
 }
 
-async function selecionarTodos() {
+async function excluirProduto(id) {
+    const confirmar = window.confirm("Tem certeza que deseja excluir este produto?");
+    if (!confirmar) {
+        return;
+    }
 
-    alterarTodos(true);
+    const dados = await buscarDados();
+    dados.produtos = dados.produtos.filter(p => p.id !== id);
+    await salvarDados(dados);
+    carregarProdutos();
 }
 
-async function desmarcarTodos() {
-
-    alterarTodos(false);
-}
+const selecionarTodos = () => alterarTodos(true);
+const desmarcarTodos = () => alterarTodos(false);
 
 async function alterarTodos(valor) {
-
-    const dados =
-        await buscarDados();
-
-    dados.produtos.forEach(p => {
-
-        p.selecionado = valor;
-    });
-
+    const dados = await buscarDados();
+    dados.produtos.forEach(p => p.selecionado = valor);
     await salvarDados(dados);
-
     carregarProdutos();
 }
 
 // =========================
-// SIMPLEX
+// Simplex
 // =========================
-
 async function calcular() {
-
-    const resposta =
-        await fetch("/simplex");
-
-    const dados =
-        await resposta.json();
-
+    const dados = await (await fetch(SIMPLEX)).json();
     renderizarResultado(dados);
 }
 
-function renderizarResultado(dados) {
-
-    document.getElementById(
-        "resultado"
-    ).innerHTML = `
-
-        <p>
-            <strong>
-                Lucro Bruto Mensal:
-            </strong>
-
-            R$ ${dados.lucroBruto.toFixed(2)}
-        </p>
-
-        <p>
-            <strong>
-                Custos Mensais:
-            </strong>
-
-            R$ ${dados.custosFixos.toFixed(2)}
-        </p>
-
-        <p>
-            <strong>
-                Lucro Líquido Mensal:
-            </strong>
-
-            R$ ${dados.lucroLiquido.toFixed(2)}
-        </p>
+function renderizarResultado({ lucroBruto, custosFixos, lucroLiquido, produtos }) {
+    resultadoDiv.innerHTML = `
+        <p><strong>Lucro Bruto Mensal:</strong> R$ ${lucroBruto.toFixed(2)}</p>
+        <p><strong>Custos Mensais:</strong> R$ ${custosFixos.toFixed(2)}</p>
+        <p><strong>Lucro Líquido Mensal:</strong> R$ ${lucroLiquido.toFixed(2)}</p>
     `;
 
-    document.getElementById(
-        "tabelaSimplex"
-    ).innerHTML = `
-
-        <h3>
-            Produtos Selecionados
-        </h3>
-
+    tabelaSimplexDiv.innerHTML = `
+        <h3>Produtos Selecionados</h3>
         <table>
-
-            <tr>
-
-                <th>Produto</th>
-                <th>Demanda Mensal</th>
-                <th>Lucro Unitário</th>
-                <th>Lucro Mensal</th>
-
-            </tr>
-
-            ${dados.produtos.map(p => `
-
+            <tr><th>Produto</th><th>Demanda Mensal</th><th>Lucro Unitário</th><th>Lucro Mensal</th></tr>
+            ${produtos.map(p => `
                 <tr>
-
                     <td>${p.nome}</td>
-
-                    <td>
-                        ${p.demanda * 4}
-                    </td>
-
-                    <td>
-                        R$ ${p.lucro.toFixed(2)}
-                    </td>
-
-                    <td>
-
-                        R$ ${(
-                            p.lucro *
-                            (p.demanda * 4)
-                        ).toFixed(2)}
-
-                    </td>
-
+                    <td>${p.demanda * 4}</td>
+                    <td>R$ ${p.lucro.toFixed(2)}</td>
+                    <td>R$ ${(p.lucro * (p.demanda * 4)).toFixed(2)}</td>
                 </tr>
-
             `).join("")}
-
         </table>
     `;
 }
 
 // =========================
-// INICIAR
+// Inicialização
 // =========================
-
 carregarProdutos();

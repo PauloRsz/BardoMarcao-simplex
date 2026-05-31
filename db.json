@@ -6,16 +6,6 @@
   },
   "produtos": [
     {
-      "id": 1,
-      "nome": "Coca Lata",
-      "custo": 3.5,
-      "venda": 6,
-      "lucro": 2.5,
-      "tempo": 1,
-      "demanda": 11,
-      "selecionado": true
-    },
-    {
       "id": 2,
       "nome": "Skol Lata",
       "custo": 3,
@@ -73,16 +63,6 @@
       "lucro": 2.49,
       "tempo": 1,
       "demanda": 130,
-      "selecionado": true
-    },
-    {
-      "id": 1779974874334,
-      "nome": "corsa",
-      "custo": 10,
-      "venda": 15,
-      "lucro": 5,
-      "tempo": 1,
-      "demanda": 1,
       "selecionado": true
     },
     {
