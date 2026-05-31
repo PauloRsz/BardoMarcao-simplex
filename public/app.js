@@ -36,6 +36,7 @@ function renderizarProdutos(produtos) {
             </div>
             
             <div class="produto-acoes">
+                <div class="edit" onclick="window.location.href='editar.html?id=${produto.id}'">✍</div>
                 <div class="delete" onclick="excluirProduto(${produto.id})">🗑️</div>
                 <div class="check ${produto.selecionado ? "ativo" : ""}"
                      onclick="alterarSelecao(${produto.id})">✓</div>
@@ -111,3 +112,9 @@ function renderizarResultado({ lucroBruto, custosFixos, lucroLiquido, produtos }
 // Inicialização
 // =========================
 carregarProdutos();
+
+window.addEventListener("pageshow", event => {
+    if (event.persisted) {
+        carregarProdutos();
+    }
+});

@@ -66,33 +66,40 @@ document
 
     const dados = await resposta.json();
 
-    const nome =
+    const rawNome =
         document.getElementById(
             "nome"
         ).value;
 
+    const nome = rawNome
+        .toLowerCase()
+        .split(" ")
+        .filter(Boolean)
+        .map(word => word[0].toUpperCase() + word.slice(1))
+        .join(" ");
+
     const custo = Number(
         document.getElementById(
             "custo"
-        ).value
+        ).value.replace(",", ".")
     );
 
     const venda = Number(
         document.getElementById(
             "venda"
-        ).value
+        ).value.replace(",", ".")
     );
 
     const tempo = Number(
         document.getElementById(
             "tempo"
-        ).value
+        ).value.replace(",", ".")
     );
 
     const demanda = Number(
         document.getElementById(
             "demanda"
-        ).value
+        ).value.replace(",", ".")
     );
 
     const lucro = venda - custo;

@@ -56,23 +56,23 @@
       "selecionado": true
     },
     {
-      "id": 1779720304268,
-      "nome": "antartica lata",
-      "custo": 2.01,
-      "venda": 4.5,
-      "lucro": 2.49,
-      "tempo": 1,
-      "demanda": 130,
-      "selecionado": true
-    },
-    {
-      "id": 1780064318542,
-      "nome": "paçoca",
+      "id": 1780198327547,
+      "nome": "Paçoca",
       "custo": 2,
       "venda": 3,
       "lucro": 1,
       "tempo": 1,
       "demanda": 50,
+      "selecionado": true
+    },
+    {
+      "id": 1780198826033,
+      "nome": "Pirulito",
+      "custo": 0.3,
+      "venda": 1,
+      "lucro": 0.7,
+      "tempo": 1,
+      "demanda": 30,
       "selecionado": true
     }
   ]

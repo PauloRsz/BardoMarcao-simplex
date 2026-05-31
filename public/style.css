@@ -135,6 +135,34 @@ button:hover {
     font-weight: bold;
 }
 
+.edit {
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #2980b9;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.edit:hover {
+
+    background: #3498db;
+}
+
 .delete {
 
     width: 28px;
