@@ -42,7 +42,7 @@
       "venda": 9,
       "lucro": 4,
       "tempo": 3,
-      "demanda": 40,
+      "demanda": 240,
       "selecionado": true
     },
     {
@@ -52,17 +52,17 @@
       "venda": 10,
       "lucro": 5,
       "tempo": 3,
-      "demanda": 60,
+      "demanda": 360,
       "selecionado": true
     },
     {
       "id": 1780198327547,
       "nome": "Paçoca",
-      "custo": 2,
-      "venda": 3,
-      "lucro": 1,
+      "custo": 0.35,
+      "venda": 2.5,
+      "lucro": 2.15,
       "tempo": 1,
-      "demanda": 50,
+      "demanda": 200,
       "selecionado": true
     },
     {
@@ -73,6 +73,36 @@
       "lucro": 0.7,
       "tempo": 1,
       "demanda": 30,
+      "selecionado": true
+    },
+    {
+      "id": 1780313837241,
+      "nome": "Antartica 300ml",
+      "custo": 2.57,
+      "venda": 4,
+      "lucro": 1.4300000000000002,
+      "tempo": 1,
+      "demanda": 903,
+      "selecionado": true
+    },
+    {
+      "id": 1780313894661,
+      "nome": "Petra 600ml",
+      "custo": 8.82,
+      "venda": 12,
+      "lucro": 3.1799999999999997,
+      "tempo": 1,
+      "demanda": 163,
+      "selecionado": true
+    },
+    {
+      "id": 1780314229248,
+      "nome": "Crystal 300ml",
+      "custo": 2.15,
+      "venda": 3,
+      "lucro": 0.8500000000000001,
+      "tempo": 1,
+      "demanda": 163,
       "selecionado": true
     }
   ]
